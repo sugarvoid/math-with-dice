@@ -22,9 +22,11 @@ var operator: int = OPERATORS.ADD
 var left_operand: int
 var right_operand: int
 
+var round_number: int
+
 
 func _ready() -> void:
-	push_error("test error")
+	self.round_number = 0
 	randomize()
 	start_new_round()
 
@@ -35,6 +37,7 @@ func _process(delta: float) -> void:
 	hud.update_time(Time.get_ticks_msec() - round_start_time)
 
 func start_new_round() -> void:
+	self.round_number += 1
 	self.round_start_time = Time.get_ticks_msec()
 	_roll_dice()
 	load_operands()
@@ -45,7 +48,7 @@ func start_new_round() -> void:
 func _unhandled_key_input(event: InputEventKey) -> void:
 	if event.is_pressed() and not event.is_echo():
 		var key = OS.get_scancode_string(event.scancode)
-		print(key)
+		## print(key)
 		
 		# This removes the "Kp" from string when using the number pad
 		if key.left(2) == "Kp":
@@ -79,22 +82,21 @@ func load_operands() -> void:
 
 func submit_answer() -> void:
 	if !self.submission.empty():
-		print(str("Elapsed time: ", (Time.get_ticks_msec() - round_start_time)))
+		print(str("Round: ", self.round_number,"  Elapsed time: ", (Time.get_ticks_msec() - round_start_time)))
 		print(str("Input: ", int(submission), ".", " Exspected: ", self.exspected_answer))
 		if self.compare_values(self.exspected_answer, int(self.submission)): 
-			print ("Answer was right!")
+			# Answer was right
 			$SoundCorrect.play()
 			# get operator code
 			# get new question
 			self.start_new_round()
 			
 		else:
-			print("Wrong!!!!")
+			# Answer was wrong
 			$SoundWrong.play()
 			self.start_new_round()
 		
 		
-		print(round_start_time)
 		
 		self._clear_submission()
 
