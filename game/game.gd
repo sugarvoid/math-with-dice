@@ -46,6 +46,11 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 	if event.is_pressed() and not event.is_echo():
 		var key = OS.get_scancode_string(event.scancode)
 		print(key)
+		
+		# This removes the "Kp" from string when using the number pad
+		if key.left(2) == "Kp":
+			key = key.substr(3, key.length())
+		
 		if key == "BackSpace":
 			submission = self.remove_last_input(submission)
 			
@@ -73,24 +78,25 @@ func load_operands() -> void:
 
 
 func submit_answer() -> void:
-	print(str("Elapsed time: ", (Time.get_ticks_msec() - round_start_time)))
-	print(str("Input: ", int(submission), ".", " Exspected: ", self.exspected_answer))
-	if self.compare_values(self.exspected_answer, int(self.submission)): 
-		print ("Answer was right!")
-		$SoundCorrect.play()
-		# get operator code
-		# get new question
-		self.start_new_round()
+	if !self.submission.empty():
+		print(str("Elapsed time: ", (Time.get_ticks_msec() - round_start_time)))
+		print(str("Input: ", int(submission), ".", " Exspected: ", self.exspected_answer))
+		if self.compare_values(self.exspected_answer, int(self.submission)): 
+			print ("Answer was right!")
+			$SoundCorrect.play()
+			# get operator code
+			# get new question
+			self.start_new_round()
+			
+		else:
+			print("Wrong!!!!")
+			$SoundWrong.play()
+			self.start_new_round()
 		
-	else:
-		print("Wrong!!!!")
-		$SoundWrong.play()
-		self.start_new_round()
-	
-	
-	print(round_start_time)
-	
-	self._clear_submission()
+		
+		print(round_start_time)
+		
+		self._clear_submission()
 
 
 static func remove_last_input(input: String) -> String:
