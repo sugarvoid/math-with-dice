@@ -11,7 +11,7 @@ enum OPERATORS {
 }
 
 onready var hud: CanvasLayer = $HUD
-onready var dice: Node2D = $Dice
+
 onready var tmr_multiplier: Timer = $TmrMultiplier
 
 
@@ -46,8 +46,8 @@ func start_new_round() -> void:
 	self.tmr_multiplier.start(MULTIPLIER_TIME)
 	self.round_number += 1
 	self.round_start_time = Time.get_ticks_msec()
-	_roll_dice()
-	load_operands()
+	_roll_right_dice()
+	_roll_left_dice()
 	# TODO: Get random operator
 	self.exspected_answer = self.get_answer(self.left_operand, self.right_operand, self.operator)
 
@@ -78,13 +78,19 @@ func _clear_submission() -> void:
 	self.submission = ""
 	self.hud.update_input(submission)
 
-func _roll_dice() -> void:
-	for d in $Dice.get_children():
+func _roll_left_dice() -> void:
+	for d in $DiceLeft.get_children():
 		d.reroll()
+	self.left_operand = $DiceLeft.get_child(0).get_value() + $DiceLeft.get_child(1).get_value() 
+
+func _roll_right_dice() -> void:
+	for d in $DiceRight.get_children():
+		d.reroll()
+	self.right_operand = $DiceRight.get_child(0).get_value() + $DiceRight.get_child(1).get_value() 
 
 func load_operands() -> void:
-	self.left_operand = self.dice.get_child(0).get_value() + self.dice.get_child(1).get_value() 
-	self.right_operand = self.dice.get_child(2).get_value() + self.dice.get_child(3).get_value() 
+	self.left_operand = $DiceLeft.get_child(0).get_value() + $DiceLeft.get_child(1).get_value() 
+	self.right_operand = $DiceRight.get_child(0).get_value() + $DiceRight.get_child(1).get_value() 
 
 
 func submit_answer() -> void:

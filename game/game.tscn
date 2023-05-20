@@ -49,18 +49,20 @@ margin_top = 19.0
 margin_right = 197.0
 margin_bottom = 85.0
 
-[node name="Dice" type="Node2D" parent="."]
+[node name="DiceLeft" type="Node2D" parent="."]
 
-[node name="Die1" parent="Dice" instance=ExtResource( 2 )]
+[node name="Die1" parent="DiceLeft" instance=ExtResource( 2 )]
 position = Vector2( 106, 185 )
 
-[node name="Die2" parent="Dice" instance=ExtResource( 2 )]
+[node name="Die2" parent="DiceLeft" instance=ExtResource( 2 )]
 position = Vector2( 179, 186 )
 
-[node name="Die3" parent="Dice" instance=ExtResource( 2 )]
+[node name="DiceRight" type="Node2D" parent="."]
+
+[node name="Die3" parent="DiceRight" instance=ExtResource( 2 )]
 position = Vector2( 410, 186 )
 
-[node name="Die4" parent="Dice" instance=ExtResource( 2 )]
+[node name="Die4" parent="DiceRight" instance=ExtResource( 2 )]
 position = Vector2( 482, 187 )
 
 [node name="Operator" type="Sprite" parent="."]
