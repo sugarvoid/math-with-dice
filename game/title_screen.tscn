@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://game/title_screen.gd" type="Script" id=1]
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="BtnAdding" type="Button" parent="."]
+margin_left = 267.0
+margin_top = 233.0
+margin_right = 365.0
+margin_bottom = 278.0
+toggle_mode = true
+text = "adding"
+
+[node name="Button2" type="Button" parent="."]
+margin_left = 265.0
+margin_top = 297.0
+margin_right = 363.0
+margin_bottom = 342.0
+disabled = true
+toggle_mode = true
+text = "subtraction"
+
+[node name="Button3" type="Button" parent="."]
+margin_left = 264.0
+margin_top = 360.0
+margin_right = 365.0
+margin_bottom = 405.0
+disabled = true
+toggle_mode = true
+text = "multiplication"
+
+[node name="BtnStart" type="Button" parent="."]
+margin_left = 266.0
+margin_top = 422.0
+margin_right = 364.0
+margin_bottom = 467.0
+text = "start"
+
+[node name="Label" type="Label" parent="."]
+margin_left = 244.0
+margin_top = 109.0
+margin_right = 396.0
+margin_bottom = 191.0
+text = "math with dice"
