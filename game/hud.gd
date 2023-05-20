@@ -13,3 +13,6 @@ func _ready() -> void:
 
 func update_input(new_text: String) -> void:
 	self.lbl_input.text = new_text
+	
+func update_time(milisec: int) -> void:
+	$LblTime.text = str(milisec)

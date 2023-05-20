@@ -14,7 +14,9 @@ func update_sprite() -> void:
 	self.sprite.frame = self._pips
 
 func get_value() -> int:
+	
 	return self._pips + 1
+	print_debug(_pips)
 	
 
 func reroll() -> void:

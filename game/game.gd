@@ -9,10 +9,15 @@ enum OPERATORS {
 }
 
 onready var hud: CanvasLayer = $HUD
+onready var dice: Node2D = $Dice
 
 var submission: String 
 
+var round_start_time: int
+
 var exspected_answer: int
+
+var operator: int = OPERATORS.ADD
 
 var left_operand: int
 var right_operand: int
@@ -20,9 +25,21 @@ var right_operand: int
 
 func _ready() -> void:
 	push_error("test error")
-	
-	$Timer.connect("timeout", self, "_roll_dice")
+	randomize()
+	start_new_round()
+
+	#$Timer.connect("timeout", self, "_roll_dice")
 	pass 
+
+func _process(delta: float) -> void:
+	hud.update_time(Time.get_ticks_msec() - round_start_time)
+
+func start_new_round() -> void:
+	self.round_start_time = Time.get_ticks_msec()
+	_roll_dice()
+	load_operands()
+	# TODO: Get random operator
+	self.exspected_answer = self.get_answer(self.left_operand, self.right_operand, self.operator)
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:
@@ -43,31 +60,46 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 			self.submit_answer()
 
 func _clear_submission() -> void:
-	self.submission.empty()
+	self.submission = ""
+	self.hud.update_input(submission)
 
 func _roll_dice() -> void:
 	for d in $Dice.get_children():
 		d.reroll()
 
+func load_operands() -> void:
+	self.left_operand = self.dice.get_child(0).get_value() + self.dice.get_child(1).get_value() 
+	self.right_operand = self.dice.get_child(2).get_value() + self.dice.get_child(3).get_value() 
+
+
 func submit_answer() -> void:
-	print(str("Submitting: ", int(submission)))
+	print(str("Elapsed time: ", (Time.get_ticks_msec() - round_start_time)))
+	print(str("Input: ", int(submission), ".", " Exspected: ", self.exspected_answer))
 	if self.compare_values(self.exspected_answer, int(self.submission)): 
 		print ("Answer was right!")
+		$SoundCorrect.play()
+		# get operator code
 		# get new question
+		self.start_new_round()
+		
 	else:
 		print("Wrong!!!!")
+		$SoundWrong.play()
+		self.start_new_round()
+	
+	
+	print(round_start_time)
 	
 	self._clear_submission()
 
 
 static func remove_last_input(input: String) -> String:
-	print("here")
 	var current_text = input   # grab the text
 	current_text.erase(current_text.length() - 1, 1) # remove the last char
 	return current_text
 	
 
-static func get_answer(left_o: int, right_o: int, operator: int) -> int:
+func get_answer(left_o: int, right_o: int, operator: int) -> int:
 	match(operator):
 		OPERATORS.ADD:
 			return left_o + right_o
@@ -86,5 +118,5 @@ func get_die_value(die_number: int) -> int:
 	return $Dice.get_child(die_number - 1).get_pips()
 
 
-static func compare_values(expected: int, entered: int) -> bool:
+func compare_values(expected: int, entered: int) -> bool:
 	return expected == entered
