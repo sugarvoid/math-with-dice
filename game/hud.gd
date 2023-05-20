@@ -16,3 +16,7 @@ func update_input(new_text: String) -> void:
 	
 func update_time(milisec: int) -> void:
 	$LblTime.text = str(milisec)
+	
+func update_score(new_score: float) -> void:
+	print('updating score')
+	$LblScore.text = str(new_score)

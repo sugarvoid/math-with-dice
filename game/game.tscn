@@ -43,6 +43,12 @@ margin_right = 540.0
 margin_bottom = 79.0
 text = "4444"
 
+[node name="LblScore" type="Label" parent="HUD"]
+margin_left = 62.0
+margin_top = 19.0
+margin_right = 197.0
+margin_bottom = 85.0
+
 [node name="Dice" type="Node2D" parent="."]
 
 [node name="Die1" parent="Dice" instance=ExtResource( 2 )]
@@ -63,8 +69,8 @@ texture = ExtResource( 5 )
 hframes = 4
 frame = 2
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
+[node name="TmrMultiplier" type="Timer" parent="."]
+one_shot = true
 
 [node name="SoundCorrect" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
