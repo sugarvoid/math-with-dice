@@ -14,6 +14,7 @@ onready var hud: CanvasLayer = $HUD
 
 onready var tmr_multiplier: Timer = $TmrMultiplier
 
+var elapsed = 0
 
 var submission: String 
 
@@ -40,7 +41,12 @@ func _ready() -> void:
 	pass 
 
 func _process(delta: float) -> void:
-	hud.update_time(Time.get_ticks_msec() - round_start_time)
+	#hud.update_time(Time.get_ticks_msec() - round_start_time)
+	
+	elapsed += delta
+	hud.update_time_string("%0.1f" % elapsed)
+	stepify(elapsed,0.01)
+	print(stepify(elapsed,0.01))
 
 func start_new_round() -> void:
 	self.tmr_multiplier.start(MULTIPLIER_TIME)

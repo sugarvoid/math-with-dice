@@ -45,10 +45,73 @@ margin_bottom = 79.0
 text = "4444"
 
 [node name="LblScore" type="Label" parent="HUD"]
-margin_left = 62.0
-margin_top = 19.0
+margin_left = 25.0
+margin_top = 31.0
+margin_right = 160.0
+margin_bottom = 97.0
+
+[node name="LblScore2" type="Label" parent="HUD"]
+margin_left = 21.0
+margin_top = 15.0
+margin_right = 76.0
+margin_bottom = 43.0
+text = "Score"
+
+[node name="Label" type="Label" parent="HUD"]
+margin_left = 355.0
+margin_top = 538.0
+margin_right = 430.0
+margin_bottom = 568.0
+text = "Average Time: "
+
+[node name="Label2" type="Label" parent="HUD"]
+margin_left = 458.0
+margin_top = 539.0
+margin_right = 533.0
+margin_bottom = 569.0
+text = "XX:XX"
+
+[node name="Label3" type="Label" parent="HUD"]
+margin_left = 24.0
+margin_top = 513.0
+margin_right = 119.0
+margin_bottom = 543.0
+text = "Average Time: "
+
+[node name="Label4" type="Label" parent="HUD"]
+margin_left = 127.0
+margin_top = 514.0
+margin_right = 202.0
+margin_bottom = 544.0
+text = "XX:XX"
+
+[node name="Label5" type="Label" parent="HUD"]
+margin_left = 20.0
+margin_top = 533.0
+margin_right = 115.0
+margin_bottom = 563.0
+text = "Average Time: "
+
+[node name="Label6" type="Label" parent="HUD"]
+margin_left = 123.0
+margin_top = 534.0
+margin_right = 198.0
+margin_bottom = 564.0
+text = "XX:XX"
+
+[node name="Label7" type="Label" parent="HUD"]
+margin_left = 19.0
+margin_top = 555.0
+margin_right = 114.0
+margin_bottom = 585.0
+text = "Average Time: "
+
+[node name="Label8" type="Label" parent="HUD"]
+margin_left = 122.0
+margin_top = 556.0
 margin_right = 197.0
-margin_bottom = 85.0
+margin_bottom = 586.0
+text = "XX:XX"
 
 [node name="DiceLeft" type="Node2D" parent="."]
 
