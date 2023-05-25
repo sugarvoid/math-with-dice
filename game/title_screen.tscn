@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://game/title_screen.gd" type="Script" id=1]
+[ext_resource path="res://btngp_diff.tres" type="ButtonGroup" id=2]
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+btngp_diff = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 613.0
@@ -20,7 +22,7 @@ margin_bottom = 278.0
 toggle_mode = true
 text = "adding"
 
-[node name="Button2" type="Button" parent="."]
+[node name="BtnSubtraction" type="Button" parent="."]
 margin_left = 265.0
 margin_top = 297.0
 margin_right = 363.0
@@ -29,7 +31,7 @@ disabled = true
 toggle_mode = true
 text = "subtraction"
 
-[node name="Button3" type="Button" parent="."]
+[node name="BtnMultiplication" type="Button" parent="."]
 margin_left = 264.0
 margin_top = 360.0
 margin_right = 365.0
@@ -51,3 +53,36 @@ margin_top = 109.0
 margin_right = 396.0
 margin_bottom = 191.0
 text = "math with dice"
+
+[node name="Difficulty" type="Control" parent="."]
+margin_left = 7.0
+margin_top = 61.0
+margin_right = 498.0
+margin_bottom = 210.0
+
+[node name="Btn10" type="Button" parent="Difficulty"]
+margin_left = 177.0
+margin_top = 84.0
+margin_right = 233.0
+margin_bottom = 122.0
+toggle_mode = true
+group = ExtResource( 2 )
+text = "10"
+
+[node name="Btn20" type="Button" parent="Difficulty"]
+margin_left = 274.0
+margin_top = 84.0
+margin_right = 330.0
+margin_bottom = 122.0
+toggle_mode = true
+group = ExtResource( 2 )
+text = "20"
+
+[node name="BtnEndless" type="Button" parent="Difficulty"]
+margin_left = 366.0
+margin_top = 84.0
+margin_right = 427.0
+margin_bottom = 122.0
+toggle_mode = true
+group = ExtResource( 2 )
+text = "Endless"

@@ -1,25 +1,13 @@
-extends Node
+class_name MathProblem
+extends Reference
 
 
 # Declare member variables here. Examples:
 # var a: int = 2
 # var b: String = "text"
-enum MATHMODE {
-	ADD,
-	SUBTRACT,
-	MULTIPLY,
-	DIVIDE
-}
-
-enum GAMEMODE {
-	TEN,
-	TWENTY,
-	ENDLESS
-}
-
-
-var math_mode: Array
-var game_mode: int
+var left_side: int
+var right_side: int
+var answer: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

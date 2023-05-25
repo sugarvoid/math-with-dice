@@ -13,9 +13,21 @@ _global_script_classes=[ {
 "class": "Die",
 "language": "GDScript",
 "path": "res://game/die/die.gd"
+}, {
+"base": "Node",
+"class": "MathManager",
+"language": "GDScript",
+"path": "res://game/math_manager.gd"
+}, {
+"base": "Reference",
+"class": "MathProblem",
+"language": "GDScript",
+"path": "res://game/class/math_problem.gd"
 } ]
 _global_script_class_icons={
-"Die": ""
+"Die": "",
+"MathManager": "",
+"MathProblem": ""
 }
 
 [application]
