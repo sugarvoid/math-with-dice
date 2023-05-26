@@ -13,6 +13,8 @@ enum OPERATORS {
 onready var hud: CanvasLayer = $HUD
 
 onready var tmr_multiplier: Timer = $TmrMultiplier
+onready var tmr_round_time: Timer = $TmrRoundTime
+
 
 var elapsed = 0
 
@@ -32,6 +34,7 @@ var player_score: float
 
 
 func _ready() -> void:
+	self.tmr_round_time.connect("timeout", self, "tic")
 	hud.update_score(player_score)
 	self.round_number = 0
 	randomize()
@@ -42,13 +45,17 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	#hud.update_time(Time.get_ticks_msec() - round_start_time)
+	tic()
 	
-	elapsed += delta
-	hud.update_time_string("%0.1f" % elapsed)
+
+func tic() -> void:
+	elapsed += 0.1
 	stepify(elapsed,0.01)
-	print(stepify(elapsed,0.01))
+	hud.update_time_string("%0.1f" % elapsed)
 
 func start_new_round() -> void:
+	self.elapsed = 0
+	self.tmr_round_time.start()
 	self.tmr_multiplier.start(MULTIPLIER_TIME)
 	self.round_number += 1
 	self.round_start_time = Time.get_ticks_msec()
@@ -71,7 +78,7 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 			submission = self.remove_last_input(submission)
 			
 		if key.is_valid_integer():
-			if submission.length() == 3:
+			if submission.length() == 4:
 				return
 			else:
 				self.submission += key
@@ -101,14 +108,17 @@ func load_operands() -> void:
 
 func submit_answer() -> void:
 	if !self.submission.empty():
-		print(str("Round: ", self.round_number,"  Elapsed time: ", (Time.get_ticks_msec() - round_start_time)))
+		#print(str(stepify(elapsed,0.01)))
+		print(str("Round: ", self.round_number,"  Elapsed time: ", stepify(elapsed,0.01)))
 		print(str("Input: ", int(submission), ".", " Exspected: ", self.exspected_answer))
 		if self.compare_values(self.exspected_answer, int(self.submission)): 
 			# Answer was right
 			$SoundCorrect.play()
 			
+			
 			var multi = $TmrMultiplier.time_left
 			print(str("time left: ", $TmrMultiplier.time_left))
+			print(str(stepify(elapsed,0.01)))
 			
 			#prevent multiplying score by 0
 			if multi == 0:
@@ -119,9 +129,11 @@ func submit_answer() -> void:
 			
 			hud.update_score(player_score)
 			
+			
+			
 			# get operator code
 			# get new question
-			self.start_new_round()
+
 			
 		else:
 			# Answer was wrong
@@ -129,9 +141,9 @@ func submit_answer() -> void:
 			
 			
 			
-			self.start_new_round()
+
 		
-		
+		self.start_new_round()
 		
 		self._clear_submission()
 
