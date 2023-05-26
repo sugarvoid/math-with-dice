@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://game/title_screen.gd" type="Script" id=1]
 [ext_resource path="res://btngp_diff.tres" type="ButtonGroup" id=2]
+[ext_resource path="res://btngp_mode.tres" type="ButtonGroup" id=3]
 
 [node name="TitleScreen" type="Control"]
 anchor_right = 1.0
@@ -20,6 +21,7 @@ margin_top = 233.0
 margin_right = 365.0
 margin_bottom = 278.0
 toggle_mode = true
+group = ExtResource( 3 )
 text = "adding"
 
 [node name="BtnSubtraction" type="Button" parent="."]
@@ -27,8 +29,8 @@ margin_left = 265.0
 margin_top = 297.0
 margin_right = 363.0
 margin_bottom = 342.0
-disabled = true
 toggle_mode = true
+group = ExtResource( 3 )
 text = "subtraction"
 
 [node name="BtnMultiplication" type="Button" parent="."]
@@ -38,6 +40,7 @@ margin_right = 365.0
 margin_bottom = 405.0
 disabled = true
 toggle_mode = true
+group = ExtResource( 3 )
 text = "multiplication"
 
 [node name="BtnStart" type="Button" parent="."]

@@ -34,6 +34,7 @@ var player_score: float
 
 
 func _ready() -> void:
+	set_up_operator_sprite()
 	self.tmr_round_time.connect("timeout", self, "tic")
 	hud.update_score(player_score)
 	self.round_number = 0
@@ -53,16 +54,35 @@ func tic() -> void:
 	stepify(elapsed,0.01)
 	hud.update_time_string("%0.1f" % elapsed)
 
+func set_up_operator_sprite() -> void:
+	match Global.math_mode:
+		Global.MATHMODE.ADD:
+			$Operator.frame = 2
+		Global.MATHMODE.SUBTRACT:
+			$Operator.frame = 1
+		Global.MATHMODE.MULTIPLY:
+			$Operator.frame = 0
+
 func start_new_round() -> void:
+	self.operator = Global.math_mode
 	self.elapsed = 0
 	self.tmr_round_time.start()
 	self.tmr_multiplier.start(MULTIPLIER_TIME)
 	self.round_number += 1
 	self.round_start_time = Time.get_ticks_msec()
-	_roll_right_dice()
-	_roll_left_dice()
+	
+	if Global.math_mode == Global.MATHMODE.SUBTRACT:
+		while right_operand >= left_operand:
+			print("right was larger than left")
+			_roll_left_dice()
+			_roll_right_dice()
+	else:
+		_roll_right_dice()
+		_roll_left_dice()
 	# TODO: Get random operator
 	self.exspected_answer = self.get_answer(self.left_operand, self.right_operand, self.operator)
+	left_operand = 0
+	right_operand = 0
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:
@@ -92,6 +112,7 @@ func _clear_submission() -> void:
 	self.hud.update_input(submission)
 
 func _roll_left_dice() -> void:
+	print("left dice roll")
 	for d in $DiceLeft.get_children():
 		d.reroll()
 	self.left_operand = $DiceLeft.get_child(0).get_value() + $DiceLeft.get_child(1).get_value() 

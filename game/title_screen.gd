@@ -30,15 +30,17 @@ func _is_math_mode_slected() -> bool:
 	return !btn_adding.pressed and !btn_subtraction.pressed and !btn_multiplication.pressed
 
 func _set_math_mode() -> void:
-	if btn_adding.pressed():
-		Global.math_mode += Global.MATHMODE.ADD
-	if btn_subtraction.pressed():
-		Global.math_mode += Global.MATHMODE.SUBTRACT
-	if btn_multiplication.pressed():
-		Global.math_mode += Global.MATHMODE.MULTIPLY
+	if btn_adding.pressed:
+		Global.math_mode = Global.MATHMODE.ADD
+	if btn_subtraction.pressed:
+		Global.math_mode = (Global.MATHMODE.SUBTRACT)
+	if btn_multiplication.pressed:
+		Global.math_mode = Global.MATHMODE.MULTIPLY
 
 
 func _start_game() -> void:
 	_set_difficulty()
-	Global.math_mode = [Global.MATHMODE.ADD]
+	_set_math_mode()
+	print(Global.math_mode)
+	#Global.math_mode = [Global.MATHMODE.ADD]
 	get_tree().change_scene("res://game/game.tscn")

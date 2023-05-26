@@ -18,7 +18,7 @@ enum GAMEMODE {
 }
 
 
-var math_mode: Array
+var math_mode: int
 var game_mode: int
 
 # Called when the node enters the scene tree for the first time.
