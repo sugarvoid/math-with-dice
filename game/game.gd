@@ -15,7 +15,7 @@ onready var hud: CanvasLayer = $HUD
 onready var tmr_multiplier: Timer = $TmrMultiplier
 onready var tmr_round_time: Timer = $TmrRoundTime
 
-
+var max_rounds: int
 var elapsed = 0
 
 var submission: String 
@@ -81,6 +81,7 @@ func start_new_round() -> void:
 		_roll_left_dice()
 	# TODO: Get random operator
 	self.exspected_answer = self.get_answer(self.left_operand, self.right_operand, self.operator)
+	hud.update_dice_vaule_labels([left_operand, right_operand])
 	left_operand = 0
 	right_operand = 0
 
@@ -96,6 +97,9 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 		
 		if key == "BackSpace":
 			submission = self.remove_last_input(submission)
+		
+		if key == "Escape":
+			get_tree().change_scene("res://game/title_screen.tscn")
 			
 		if key.is_valid_integer():
 			if submission.length() == 4:
@@ -106,6 +110,10 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 		
 		if key == "Enter":
 			self.submit_answer()
+
+func increase_round_num() -> void:
+	self.round_number += 1
+	
 
 func _clear_submission() -> void:
 	self.submission = ""
@@ -125,6 +133,7 @@ func _roll_right_dice() -> void:
 func load_operands() -> void:
 	self.left_operand = $DiceLeft.get_child(0).get_value() + $DiceLeft.get_child(1).get_value() 
 	self.right_operand = $DiceRight.get_child(0).get_value() + $DiceRight.get_child(1).get_value() 
+	
 
 
 func submit_answer() -> void:
@@ -163,7 +172,7 @@ func submit_answer() -> void:
 			
 			
 
-		
+		self.increase_round_num()
 		self.start_new_round()
 		
 		self._clear_submission()

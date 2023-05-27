@@ -117,6 +117,18 @@ margin_right = 197.0
 margin_bottom = 586.0
 text = "XX:XX"
 
+[node name="LeftDice" type="Label" parent="HUD"]
+margin_left = 112.0
+margin_top = 84.0
+margin_right = 167.0
+margin_bottom = 137.0
+
+[node name="RightDice" type="Label" parent="HUD"]
+margin_left = 422.0
+margin_top = 83.0
+margin_right = 477.0
+margin_bottom = 136.0
+
 [node name="DiceLeft" type="Node2D" parent="."]
 
 [node name="Die1" parent="DiceLeft" instance=ExtResource( 2 )]

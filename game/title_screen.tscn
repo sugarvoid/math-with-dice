@@ -38,7 +38,6 @@ margin_left = 264.0
 margin_top = 360.0
 margin_right = 365.0
 margin_bottom = 405.0
-disabled = true
 toggle_mode = true
 group = ExtResource( 3 )
 text = "multiplication"

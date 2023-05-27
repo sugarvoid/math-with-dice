@@ -22,3 +22,8 @@ func update_time_string(milisec: String) -> void:
 
 func update_score(new_score: float) -> void:
 	$LblScore.text = str(new_score)
+
+func update_dice_vaule_labels(dice: Array) -> void:
+	print("debug")
+	$LeftDice.text = str(dice[0])
+	$RightDice.text = str(dice[1])
