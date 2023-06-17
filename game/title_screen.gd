@@ -21,10 +21,13 @@ func _set_difficulty() -> void:
 	match selected.name:
 		"Btn10":
 			print("selected 10")
+			Global.num_of_rounds = 10
 		"Btn20":
 			print("selcted 20")
+			Global.num_of_rounds = 20
 		"BtnEndless":
 			print("selected endless")
+			Global.num_of_rounds = -1
 
 func _is_math_mode_slected() -> bool:
 	return !btn_adding.pressed and !btn_subtraction.pressed and !btn_multiplication.pressed

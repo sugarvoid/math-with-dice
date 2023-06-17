@@ -15,7 +15,7 @@ onready var hud: CanvasLayer = $HUD
 onready var tmr_multiplier: Timer = $TmrMultiplier
 onready var tmr_round_time: Timer = $TmrRoundTime
 
-var max_rounds: int
+
 var elapsed = 0
 
 var submission: String 
@@ -32,14 +32,17 @@ var right_operand: int
 var round_number: int
 var player_score: float
 
+var round_string: String #= "{0} of {1}".format([self.round_number, str(10)]) 
+
 
 func _ready() -> void:
 	set_up_operator_sprite()
 	self.tmr_round_time.connect("timeout", self, "tic")
 	hud.update_score(player_score)
-	self.round_number = 0
+	self.round_number = 1
 	randomize()
 	start_new_round()
+	
 
 	#$Timer.connect("timeout", self, "_roll_dice")
 	pass 
@@ -67,11 +70,13 @@ func set_up_operator_sprite() -> void:
 			$HUD/LblOperator.text = "*"
 
 func start_new_round() -> void:
+	self.round_string = "{0} of {1}".format([self.round_number, str(Global.num_of_rounds)]) 
+	self.hud.update_round(round_string)
 	self.operator = Global.math_mode
 	self.elapsed = 0
 	self.tmr_round_time.start()
 	self.tmr_multiplier.start(MULTIPLIER_TIME)
-	self.round_number += 1
+	
 	self.round_start_time = Time.get_ticks_msec()
 	
 	if Global.math_mode == Global.MATHMODE.SUBTRACT:
@@ -174,9 +179,15 @@ func submit_answer() -> void:
 			
 			
 			
-
-		self.increase_round_num()
-		self.start_new_round()
+		
+		if self.round_number == Global.num_of_rounds:
+			# end the game
+			# go to reseult screen 
+			# stop timers 
+			pass
+		else:
+			self.increase_round_num()
+			self.start_new_round()
 		
 		self._clear_submission()
 
