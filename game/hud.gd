@@ -2,6 +2,7 @@ extends CanvasLayer
 
 
 onready var lbl_input: Label = $LblInput
+onready var lbl_score: Label = get_node("LblScore")
 
 var lbl_input_length: int
 

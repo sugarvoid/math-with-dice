@@ -58,10 +58,13 @@ func set_up_operator_sprite() -> void:
 	match Global.math_mode:
 		Global.MATHMODE.ADD:
 			$Operator.frame = 2
+			$HUD/LblOperator.text = "+"
 		Global.MATHMODE.SUBTRACT:
 			$Operator.frame = 1
+			$HUD/LblOperator.text = "-"
 		Global.MATHMODE.MULTIPLY:
 			$Operator.frame = 0
+			$HUD/LblOperator.text = "*"
 
 func start_new_round() -> void:
 	self.operator = Global.math_mode

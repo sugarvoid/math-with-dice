@@ -29,6 +29,19 @@ color = Color( 0, 0, 0, 1 )
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource( 4 )
 
+[node name="RoundInfo" type="Control" parent="HUD"]
+margin_left = -6.0
+margin_top = -27.0
+margin_right = 606.0
+margin_bottom = 116.0
+
+[node name="LblRound" type="Label" parent="HUD/RoundInfo"]
+margin_left = 181.0
+margin_top = 42.0
+margin_right = 280.0
+margin_bottom = 81.0
+text = "1 of 10"
+
 [node name="LblInput" type="Label" parent="HUD"]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -40,6 +53,21 @@ margin_right = 86.0
 margin_bottom = -152.0
 custom_fonts/font = SubResource( 1 )
 text = "0000"
+
+[node name="LblOperator" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -68.0
+margin_top = -482.0
+margin_right = 7.99994
+margin_bottom = -395.0
+rect_scale = Vector2( 1.7, 1.7 )
+custom_fonts/font = SubResource( 1 )
+text = "+"
+align = 1
+valign = 1
 
 [node name="LblTime" type="Label" parent="HUD"]
 margin_left = 424.0
@@ -54,7 +82,7 @@ margin_top = 31.0
 margin_right = 160.0
 margin_bottom = 97.0
 
-[node name="LblScore2" type="Label" parent="HUD"]
+[node name="StaticScore" type="Label" parent="HUD"]
 margin_left = 21.0
 margin_top = 15.0
 margin_right = 76.0
@@ -146,7 +174,7 @@ position = Vector2( 410, 186 )
 position = Vector2( 482, 187 )
 
 [node name="Operator" type="Sprite" parent="."]
-position = Vector2( 296, 187 )
+position = Vector2( 533, 396 )
 texture = ExtResource( 5 )
 hframes = 4
 frame = 2
